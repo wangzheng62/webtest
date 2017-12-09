@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for
+from flask import Flask,redirect,url_for,render_template
 from alarmclock import alarmclock
 import time
 
@@ -6,10 +6,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    now=time.time()
-    alarmclock(now + 10,ss, 2, 2)
-    return 'Hello World!'
+def index():
+    return render_template('index.html')
 @app.route('/test01')
 def test01():
     return 'test01!'
