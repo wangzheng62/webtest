@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+	{% block link%}{% endblock %}
+	{% block script%}{% endblock %}
+</head>
+<body>
+    <div id="top">{% block top %}{% endblock %}</div>
+	<div id="left">{% block left %}{% endblock %}</div>
+	<div id="pagearea">{% block pagearea %}{% endblock %}</div>
+	<div id="right">{% block right %}{% endblock %}</div>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+#top{
+border-style:dotted dotted dotted dotted;
+border-width:1px 1px 1px 1px;
+width:100%;
+height:35px;
+background-color:gray;
+float:left;}
+#left{border-style:dotted dotted dotted dotted;
+border-width:1px 1px 1px 1px;
+width:14%;
+height:680px;
+background-color:gray;
+float:left;
+}
+#pagearea{border-style:dotted dotted dotted dotted;
+border-width:1px 1px 1px 1px;
+width:70%;
+height:680px;
+background-color:gray;
+float:left;
+}
+#right{border-style:dotted dotted dotted dotted;
+border-width:1px 1px 1px 1px;
+width:15%;
+height:680px;
+background-color:gray;
+float:right;
+}
+
