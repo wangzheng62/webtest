@@ -8,14 +8,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/test01')
-def test01():
-    return 'test01!'
-@app.route('/alarm')
-def alarm():
-    return ("闹钟响了,%s" % (time.time()))
-def ss():
-    return redirect(url_for('alarm'))
+@app.route('/userhome')
+def userhome():
+    return render_template('userhome.html')
+@app.route('/userhome01')
+def userhome01():
+    return render_template('userhome01.html')
 
 
 if __name__ == '__main__':
