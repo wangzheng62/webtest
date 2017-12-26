@@ -1,6 +1,10 @@
+
 {% extends 'base.html' %}
-{# #}
 {% block title %}index{%endblock%}
-{% block top %}top{% endblock %}
-{% block pagearea %}pagearea{% endblock %}
-{% block right %}right{% endblock %}
+	{% macro row(name,wid12=(12,)) -%}
+		<div class="row">
+        {% for wid in wid12 %}
+			<div class="col-sm-{{wid}}"> <button type="button" class="btn btn-default">{{name}}</button></div>
+        {% endfor %}
+		</div>
+	{%- endmacro%}
