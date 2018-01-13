@@ -9,10 +9,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 @app.route('/form01')
-def userhome():
+def form01():
     return render_template('form01.html')
 @app.route('/echarts01')
-def userhome01():
+def echarts01():
     return render_template('echarts01.html')
 
 
