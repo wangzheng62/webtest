@@ -8,12 +8,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/userhome')
+@app.route('/form01')
 def userhome():
-    return render_template('userhome.html')
-@app.route('/userhome01')
+    return render_template('form01.html')
+@app.route('/echarts01')
 def userhome01():
-    return render_template('userhome01.html')
+    return render_template('echarts01.html')
 
 
 if __name__ == '__main__':
