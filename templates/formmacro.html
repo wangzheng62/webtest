@@ -1,0 +1,19 @@
+
+{# 录入表单模板 #}
+{% macro col(key) -%}
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label for={{key}} class=" control-label">{{key}}</label>
+            <input type="text" class=" form-control" id={{key}} placeholder="在此输入">
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro row(keys) -%}
+    <div class="row">
+    {% for key in keys -%}
+         {{col(key)}}
+    {%- endfor  %}
+    </div>
+{%- endmacro%}
+{# end录入表单模板 #}
