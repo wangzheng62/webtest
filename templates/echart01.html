@@ -1,0 +1,11 @@
+
+{% extends 'index.html' %}
+{% import 'echartsmacro.html'as echarts %}
+{# #}
+{% block title %}用户主页{%endblock%}
+
+{% block pagearea %}
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="container" style="width: 600px;height:400px;"></div>
+        {{ echarts.echarts() }}
+{%endblock%}

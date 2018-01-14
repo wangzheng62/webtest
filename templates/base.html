@@ -11,7 +11,13 @@
 	{% block script%}{% endblock %}
 </head>
 <body>
-    <div id="top" class="">{% block top %}{% endblock %}</div>
+<nav id="top" class="navbar navbar-inverse">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        {% block top %}{% endblock %}
+    </div>
+    </div>
+</nav>
 	<div id="left" class="col-sm-2">{% block left %}{% endblock %}</div>
 	<div id="pagearea" class="col-sm-8">{% block pagearea %}{% endblock %}</div>
 	<div id="right" class="col-sm-2">{% block right %}{% endblock %}</div>

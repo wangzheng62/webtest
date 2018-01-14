@@ -1,10 +1,17 @@
 
 {% extends 'index.html' %}
-{% import 'echartsmacro.html'as echarts %}
+{% import 'formmacro.html'as forms %}
 {# #}
 {% block title %}用户主页{%endblock%}
+{% block right -%}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+        <script>alert("{{ message }}")</script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{%- endblock %}
 {% block pagearea %}
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="container" style="width: 600px;height:400px;"></div>
-        {{ echarts.echarts() }}
+    {{forms.row(("客户名","手机号码","公司名称","QQ号","微信号","地址","行业","状态"))}}
 {%endblock%}

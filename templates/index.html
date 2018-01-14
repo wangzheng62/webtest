@@ -1,7 +1,10 @@
 
 {% extends 'base.html' %}
-{% block title %}index{%endblock%}
+{% block title %}index{% endblock %}
 {% block top %}
-    <a class="btn btn-default" href="/form01" role="button">form01</a>
-    <a class="btn btn-default" href="/echarts01" role="button">echarts01</a>
+    <ul class="nav navbar-nav">
+    <li role="presentation" ><a href="/form01" >form01</a></li>
+    <li role="presentation" ><a href="/echarts01" >echarts01</a></li>
+    <li role="presentation" ><a href="/list01" role="button">list01</a></li>
+    </ul>
 {% endblock %}
