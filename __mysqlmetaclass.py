@@ -1,21 +1,29 @@
 import mysql.connector
+from config import MYSQLSERVER
 
 
 # 服务器
 
 class Mysqlserver:
-    SERVER = {'user': 'root', 'password': '12345678', 'host': '127.0.0.1'}
+    DBSERVER = MYSQLSERVER
+
     @property
+    def dbes(self, __dbes=None):
+        return __dbes
+
+    @dbes.getter
     def dbes(self):
-        conn = mysql.connector.connect(**self.SERVER)
+        conn = mysql.connector.connect(**self.DBSERVER)
         cr = conn.cursor()
         sql = 'show databases;'
         cr.execute(sql)
         t = cr.fetchall()
-        res = []
+        __dbes = []
         for tp in t:
-            res.append(tp[0])
-        return res
+            __dbes.append(tp[0])
+        return __dbes
+
+
 # 数据库
 class MysqlDBmetaclass(type):
     def __new__(mcs, name, bases, attrs):
@@ -25,35 +33,39 @@ class MysqlDBmetaclass(type):
 
 
 class MysqlDB(Mysqlserver, metaclass=MysqlDBmetaclass):
-    @property
-    def getconn(self):
-        l_o_c_a_l_d_b = dict(self.SERVER, **self.dbconn)
-        conn = mysql.connector.connect(**l_o_c_a_l_d_b)
+    def __getconn(self):
+        local_db = dict(self.DBSERVER, **self.dbconn)
+        conn = mysql.connector.connect(**local_db)
         return conn
 
     def getdata(self, sql):
-        conn = self.getconn
+        conn = self.__getconn()
         cr = conn.cursor()
         cr.execute(sql)
         t = cr.fetchall()
         return t
-
     def changedata(self, sql):
-        conn = self.getconn
+        conn = self.__getconn()
         cr = conn.cursor()
         cr.execute(sql)
         conn.commit()
+
     @property
+    def tables(self, __tables=None):
+        return __tables
+
+    @tables.getter
     def tables(self):
-        conn = self.getconn
+        conn = self.__getconn()
         cr = conn.cursor()
         sql = 'show tables;'
         cr.execute(sql)
         t = cr.fetchall()
-        res = []
+        __tables = []
         for tp in t:
-            res.append(tp[0])
-        return res
+            __tables.append(tp[0])
+       
+        return __tables
 
 
 # 表
@@ -68,7 +80,7 @@ class MysqlTableBase(metaclass=MysqlTableMetaclass):
     # 获取列名
     @property
     def colnames(self):
-        sql = 'select column_name from information_schema.columns where table_schema =\'%s\' and table_name = \'%s\' ;' % (
+        sql = 'select column_name from information_schema.columns where table_schema =\'{}\' and table_name = \'{}\' ;'.format(
             self.dbname, self.tablename)
         t = self.getdata(sql)
         l = []
@@ -161,7 +173,7 @@ class MysqlTable(MysqlTableBase):
                 temp = '%s =\'%s\' and ' % (key, self.info[key])
                 condition = condition + temp
             condition = condition[:-4]
-            sql = 'UPDATE %s SET %s where %s;' % (self.tablename, data, condition)
+            sql = 'UPDATE {} SET {} where {};'.format(self.tablename, data, condition)
             self.changedata(sql)
             return True
 
@@ -176,8 +188,7 @@ class MysqlTable(MysqlTableBase):
         self.changedata(sql)
         return True
 
-    # DDL
-    """ALTER TABLE tablename [ADD,DROP,MODIFY] colname datatype [UNIQUE,NOT NULL]"""
+    # DDL   "ALTER TABLE tablename [ADD,DROP,MODIFY] colname datatype [UNIQUE,NOT NULL]"
 
     def __alter(self, colname, action='', datatype='varchar(10)', constraint=''):
         sql = 'alter table {} {} {} {} {};'.format(self.tablename, action, colname, datatype, constraint)
@@ -193,20 +204,28 @@ class MysqlTable(MysqlTableBase):
 if __name__ == '__main__':
     class Groupdata1(MysqlDB):
         pass
+
+
     class Group10(MysqlTable, Groupdata1):
         """aaaa"""
         pass
+
+
     class Crm(MysqlDB):
         pass
+
+
     class Userlist(MysqlTable, Crm):
         pass
+
+
     l = Group10()
     s = Userlist()
-    print(l.SERVER)
+    print(l.DBSERVER)
     print(l.dbes)
     print(l.tables)
     print(l.colnames)
-    print(s.SERVER)
+    print(s.DBSERVER)
     print(s.dbes)
     print(s.tables)
     print(s.colnames)
