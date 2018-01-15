@@ -20,8 +20,12 @@ def list01():
 @app.route('/getform',methods=["get","post"])
 def getform():
     a=request.form
-    flash("提交成功")
+    if save(a):
+        flash("提交成功")
+    else:
+        flash("提交失败")
     return redirect(url_for("form01"))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True)
+
