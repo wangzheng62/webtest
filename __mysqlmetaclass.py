@@ -1,5 +1,5 @@
 import mysql.connector
-from config import MYSQLSERVER
+from CONFIG import MYSQLDBSERVER
 
 
 # 服务器
