@@ -5,9 +5,15 @@ class DBserver(Mysqlserver):
     pass
 
 
-class Groupdata1(MysqlDB, DBserver):
+class Crm(MysqlDB, DBserver):
     pass
 
 
-class Group10(MysqlTable, Groupdata1):
+class Employee(MysqlTable, Crm):
+    pass
+class Orders(MysqlTable, Crm):
+    pass
+class Product(MysqlTable, Crm):
+    pass
+class History(MysqlTable, Crm):
     pass

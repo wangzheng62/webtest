@@ -193,7 +193,7 @@ class MysqlTable(MysqlTableBase):
                 pass
             else:
                 __COLNAME=__COLNAME+key+','
-                __VALUES=__VALUES+self.info[key][0]+','
+                __VALUES=__VALUES+'\''+self.info[key][0]+'\''+','
         __COLNAME=__COLNAME[:-1]+')'
         __VALUES=__VALUES[:-1]+')'
         __SQL=self.insert(TABLES=self.table_name,COLNAMES=__COLNAME,VALUES=__VALUES)
